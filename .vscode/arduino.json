@@ -1,5 +1,5 @@
 {
-    "sketch": "1\\helloworld.ino",
+    "sketch": "1\\led.ino",
     "board": "arduino:avr:uno",
     "port": "COM3"
 }
