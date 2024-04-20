@@ -1,0 +1,42 @@
+[
+    {
+        "concept": "Realy",
+        "defination": "Turns off or on at a specific voltage",
+        "made_of": "Electromagnet and switch or solid state type",
+        "usages": [
+            "By acting as a switch it can be used to control the devices that use higher voltage",
+            "Converting low power to high power"
+        ],
+        "voltage": [
+            {
+                "low": "3.2v or 5v"
+            },
+            {
+                "high": "12v or 24v"
+            }
+        ]
+    },
+    {
+        "concept": "Realy module",
+        "defination": "One or more relay + other components to provide isolation and protection",
+        "working":"Uses Electromagnet to open or close one or many electrical contacts",
+        "types": [
+            {
+                "single_channel": "To control single load",
+                "multi_channel": "To control multiple load"
+            }
+        ],
+        "usages": [
+            "By acting as a switch it can be used to control the devices that use higher voltage",
+            "Converting low power to high power"
+        ],
+        "voltage": [
+            {
+                "low": "3.2v or 5v"
+            },
+            {
+                "high": "12v or 24v"
+            }
+        ]
+    }
+]
