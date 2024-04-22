@@ -1,17 +1,16 @@
 #include <LiquidCrystal.h>
 
-const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
-
+LiquidCrystal lcd(A5,A4,A3,A2,A1,A0);
 
 int fluid_speed = 0;
 int volume = 0;
 
 
-
 void setup()
 {
   lcd.begin(16,2);
+  
+
 }
 
 void loop() {
@@ -22,7 +21,7 @@ void loop() {
   }
   lcd.setCursor(0,0);
   
-  lcd.print("Speed:");
+  lcd.print("Speed : ");
   lcd.print(getFluidSpeed());
   lcd.print("mL");
 
@@ -34,12 +33,14 @@ void loop() {
   delay(100);
   
   lcd.clear(); 
+  
 }
 
+
 int getFluidSpeed(){
-  fluid_speed++;
+  return fluid_speed++;
 }
 
 int getVolume(){
-  volume++;
+  return volume++;
 }
