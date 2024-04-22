@@ -9,30 +9,40 @@ int volume = 0;
 void setup()
 {
   lcd.begin(16,2);
-  
-
 }
 
 void loop() {
-  if(volume ==1000){
+  if(volume ==100){
     fluid_speed = 0;
     volume = 0;
+    lcd.display();
     delay(4000);
+    lcd.clear();
   }
   lcd.setCursor(0,0);
-  
   lcd.print("Speed : ");
-  lcd.print(getFluidSpeed());
+
+  lcd.setCursor(14,0);
   lcd.print("mL");
+
+
+  lcd.setCursor(10,0);
+  lcd.print(getFluidSpeed());
+
 
   lcd.setCursor(0,1);
   lcd.print("Total : ");
-  lcd.print(getVolume());
+
+  lcd.setCursor(14,1);
   lcd.print("mL");
 
-  delay(100);
-  
-  lcd.clear(); 
+
+  lcd.setCursor(10,1);
+  lcd.print(getVolume());
+
+
+
+  delay(40);
   
 }
 
