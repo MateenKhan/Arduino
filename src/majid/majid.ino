@@ -20,8 +20,8 @@ byte colPins[COLS] = {6, 7, 8, 9};
 Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 int LED = 10;
 int relay = 11;
-unsigned int intput_volume = 0;
-unsigned int total_volume = 0;
+int intput_volume = 0;
+int total_volume = 0;
 
 void setup()
 {
@@ -43,7 +43,7 @@ void loop()
     if (pressedKey){
         if (pressedKey >= '0' && pressedKey <= '9'){
             intput_volume = intput_volume * 10 + (pressedKey - '0');
-            if(intput_volume>=65501){
+            if(intput_volume>=3100){
                 defaultStage();
             }
         }
@@ -86,8 +86,9 @@ void turnOffPump(){
 }
 
 void defaultStage(){
-    initializeData();
+    delay(200);
     lcd.clear();
+    initializeData();
     lcd.setCursor(0, 0);
     lcd.print("input : ");
 
