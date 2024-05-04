@@ -19,10 +19,14 @@ byte rowPins[ROWS] = {2, 3, 4, 5};
 byte colPins[COLS] = {6, 7, 8, 9};
 Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 int LED = 10;
+int relay = 11;
+
 
 void setup()
 {
     Serial.begin(9600);
+    pinMode(relay, OUTPUT);
+    digitalWrite(relay, LOW);
     lcd.init();
     lcd.backlight();
     lcd.begin(16, 2);
@@ -57,10 +61,21 @@ void loop()
         Serial.print(pressedKey);
         if (pressedKey == 'D'){
             digitalWrite(LED, HIGH);
+            turnOnPump();
         } else{
             digitalWrite(LED, LOW);
+            turnOffPump();
         }
     }
 
     delay(200);
+}
+
+
+void turnOnPump(){
+    digitalWrite(relay, LOW);
+}
+
+void turnOffPump(){
+    digitalWrite(relay, HIGH);
 }
