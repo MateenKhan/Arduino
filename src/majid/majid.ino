@@ -4,6 +4,9 @@
 #include <LiquidCrystal_I2C.h>
 #include <Keypad.h>
 
+#define FLOW_SENSOR_PIN 12
+volatile long pulse; 
+float volume;
 const byte ROWS = 4;
 const byte COLS = 4;
 
@@ -34,6 +37,9 @@ void setup()
     defaultStage();
     pinMode(LED, OUTPUT);
     turnOffPump();
+
+    pinMode(FLOW_SENSOR_PIN, INPUT);
+    attachInterrupt(digitalPinToInterrupt(FLOW_SENSOR_PIN), _increase, RISING);
 }
 
 void loop()
@@ -61,8 +67,11 @@ void loop()
 void startFillingLiquid(){
     digitalWrite(LED, HIGH);
     turnOnPump();
+            total_volume = 2.663 * pulse;
+
     while(total_volume<=intput_volume-1){
-        total_volume++;
+        // total_volume++;
+        total_volume = 2.663 * pulse;
         printVolume();
         delay(100);        
     }
@@ -117,4 +126,9 @@ void printVolume(){
 void initializeData(){
     intput_volume = 0;
     total_volume = 0;
+    pulse = 0;
+}
+
+void _increase(){
+    pulse++;
 }
