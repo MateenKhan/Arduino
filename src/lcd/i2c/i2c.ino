@@ -27,7 +27,7 @@ void loop()
   
   // Print on first row
   lcd.setCursor(0,0);
-  lcd.print("Hello world!");
+  lcd.print("aaaaa world!");
   
   // Wait 1 second
   delay(100);

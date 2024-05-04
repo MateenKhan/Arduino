@@ -1,5 +1,5 @@
 {
-    "sketch": "1\\led.ino",
+    "sketch": "src\\lcd\\i2c\\i2c.ino",
     "board": "arduino:avr:uno",
     "port": "COM3"
 }
