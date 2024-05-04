@@ -1,5 +1,5 @@
 {
-    "sketch": "src\\lcd\\i2c\\i2c_keypad\\i2c_keypad.ino",
+    "sketch": "src\\majid\\majid.ino",
     "board": "arduino:avr:uno",
     "port": "COM3"
 }
