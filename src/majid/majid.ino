@@ -32,7 +32,6 @@ void setup()
     lcd.backlight();
     lcd.begin(16, 2);
     printConstantFillingInformation();
-
     pinMode(LED, OUTPUT);
     turnOffPump();
 }
@@ -45,14 +44,12 @@ void loop()
         if (pressedKey >= '0' && pressedKey <= '9'){
             intput_volume = intput_volume * 10 + (pressedKey - '0');
         }
-        lcd.setCursor(7, 0);
-        lcd.print(intput_volume);
+        printInput();
         if (pressedKey == 'D'){
             startFillingLiquid();
-            while(total_volume<=intput_volume){
+            while(total_volume<=intput_volume-1){
                 total_volume++;
-                lcd.setCursor(7, 1);
-                lcd.print(total_volume);
+                printVolume();
                 delay(100);        
             }
             stopFillingLiquid();
@@ -72,6 +69,7 @@ void stopFillingLiquid(){
     delay(2000);
     intput_volume = 0;
     total_volume = 0;
+    printConstantFillingInformation();
 }
 
 void turnOnPump(){
@@ -94,4 +92,16 @@ void printConstantFillingInformation(){
 
     lcd.setCursor(14, 1);
     lcd.print("mL");
+    printInput();
+    printVolume();  
+}
+
+void printInput(){
+    lcd.setCursor(7, 0);
+    lcd.print(intput_volume);
+}
+
+void printVolume(){
+    lcd.setCursor(7, 1);
+    lcd.print(total_volume);
 }
