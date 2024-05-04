@@ -30,20 +30,10 @@ void setup()
     lcd.init();
     lcd.backlight();
     lcd.begin(16, 2);
-
-    lcd.setCursor(0, 0);
-    lcd.print("Speed : ");
-
-    lcd.setCursor(14, 0);
-    lcd.print("mL");
-
-    lcd.setCursor(0, 1);
-    lcd.print("Total : ");
-
-    lcd.setCursor(14, 1);
-    lcd.print("mL");
+    printConstantFillingInformation();
 
     pinMode(LED, OUTPUT);
+    turnOffPump();
 }
 
 void loop()
@@ -78,4 +68,18 @@ void turnOnPump(){
 
 void turnOffPump(){
     digitalWrite(relay, HIGH);
+}
+
+void printConstantFillingInformation(){
+    lcd.setCursor(0, 0);
+    lcd.print("Speed : ");
+
+    lcd.setCursor(14, 0);
+    lcd.print("mL");
+
+    lcd.setCursor(0, 1);
+    lcd.print("Total : ");
+
+    lcd.setCursor(14, 1);
+    lcd.print("mL");
 }
