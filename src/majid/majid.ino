@@ -20,12 +20,12 @@ byte colPins[COLS] = {6, 7, 8, 9};
 Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 int LED = 10;
 int relay = 11;
-int intput_volume = 0;
-int total_volume = 0;
+unsigned int intput_volume = 0;
+unsigned int total_volume = 0;
 
 void setup()
 {
-    Serial.begin(9600);
+    // Serial.begin(9600);
     pinMode(relay, OUTPUT);
     digitalWrite(relay, LOW);
     lcd.init();
@@ -43,6 +43,9 @@ void loop()
     if (pressedKey){
         if (pressedKey >= '0' && pressedKey <= '9'){
             intput_volume = intput_volume * 10 + (pressedKey - '0');
+            if(intput_volume>=65501){
+                defaultStage();
+            }
         }
         printInput();
         if (pressedKey == 'D'){
