@@ -31,7 +31,7 @@ void setup()
     lcd.init();
     lcd.backlight();
     lcd.begin(16, 2);
-    printConstantFillingInformation();
+    defaultStage();
     pinMode(LED, OUTPUT);
     turnOffPump();
 }
@@ -53,6 +53,8 @@ void loop()
                 delay(100);        
             }
             stopFillingLiquid();
+        } else if (pressedKey == 'C'){
+            defaultStage();
         }
     }
     delay(200);
@@ -67,9 +69,8 @@ void stopFillingLiquid(){
     digitalWrite(LED, LOW);
     turnOffPump();
     delay(2000);
-    intput_volume = 0;
-    total_volume = 0;
-    printConstantFillingInformation();
+    
+    defaultStage();
 }
 
 void turnOnPump(){
@@ -80,7 +81,8 @@ void turnOffPump(){
     digitalWrite(relay, HIGH);
 }
 
-void printConstantFillingInformation(){
+void defaultStage(){
+    initializeData();
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("input : ");
@@ -105,4 +107,9 @@ void printInput(){
 void printVolume(){
     lcd.setCursor(7, 1);
     lcd.print(total_volume);
+}
+
+void initializeData(){
+    intput_volume = 0;
+    total_volume = 0;
 }
