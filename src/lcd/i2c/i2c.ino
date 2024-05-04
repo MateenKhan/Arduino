@@ -14,8 +14,8 @@ LiquidCrystal_I2C lcd(0x27, 16,2);
 void setup()
 {
  
- lcd.init();
-  lcd.backlight();
+lcd.init();
+lcd.backlight();
  
 }
  
@@ -41,5 +41,4 @@ void loop()
   
   // Clear the display
   lcd.clear();
- 
 }
