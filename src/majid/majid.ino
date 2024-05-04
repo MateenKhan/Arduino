@@ -18,6 +18,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 byte rowPins[ROWS] = {2, 3, 4, 5};
 byte colPins[COLS] = {6, 7, 8, 9};
 Keypad customKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+int LED = 10;
 
 void setup()
 {
@@ -37,6 +38,8 @@ void setup()
 
     lcd.setCursor(14, 1);
     lcd.print("mL");
+
+    pinMode(LED, OUTPUT);
 }
 
 void loop()
@@ -50,6 +53,13 @@ void loop()
 
         lcd.setCursor(10, 1);
         lcd.print(pressedKey);
+
+        Serial.print(pressedKey);
+        if (pressedKey == 'D'){
+            digitalWrite(LED, HIGH);
+        } else{
+            digitalWrite(LED, LOW);
+        }
     }
 
     delay(200);
