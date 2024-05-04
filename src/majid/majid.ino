@@ -47,12 +47,7 @@ void loop()
         printInput();
         if (pressedKey == 'D'){
             startFillingLiquid();
-            while(total_volume<=intput_volume-1){
-                total_volume++;
-                printVolume();
-                delay(100);        
-            }
-            stopFillingLiquid();
+            
         } else if (pressedKey == 'C'){
             defaultStage();
         }
@@ -63,6 +58,12 @@ void loop()
 void startFillingLiquid(){
     digitalWrite(LED, HIGH);
     turnOnPump();
+    while(total_volume<=intput_volume-1){
+        total_volume++;
+        printVolume();
+        delay(100);        
+    }
+    stopFillingLiquid();
 }
 
 void stopFillingLiquid(){
