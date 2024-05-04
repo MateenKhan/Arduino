@@ -22,7 +22,6 @@ int LED = 10;
 int relay = 11;
 int intput_volume = 0;
 int total_volume = 0;
-bool isFilling = false;
 
 void setup()
 {
@@ -40,68 +39,52 @@ void setup()
 
 void loop()
 {
-    Serial.print(isFilling);
-    if(!isFilling){
-        Serial.print(isFilling);
-        processInput();
-    }
-    delay(200);
-}
 
-void processInput(){
     char pressedKey = customKeypad.getKey();
     if (pressedKey){
-        Serial.print(pressedKey);
         if (pressedKey >= '0' && pressedKey <= '9'){
-            String str_input = "";
-            str_input += pressedKey;
-            int int_input = str_input.toInt();
-            if(intput_volume == 0){
-                intput_volume = int_input;
-            } else {
-                intput_volume = (intput_volume * 10) + int_input;
-            }
-        } else{
-            if (pressedKey == 'D'){
-                startFillingLiquid();
-            }
+            intput_volume = intput_volume * 10 + (pressedKey - '0');
         }
-
+        lcd.setCursor(7, 0);
+        lcd.print(intput_volume);
+        if (pressedKey == 'D'){
+            startFillingLiquid();
+            while(total_volume<=intput_volume){
+                total_volume++;
+                lcd.setCursor(7, 1);
+                lcd.print(total_volume);
+                delay(100);        
+            }
+            stopFillingLiquid();
+        }
     }
+    delay(200);
 }
 
 void startFillingLiquid(){
     digitalWrite(LED, HIGH);
     turnOnPump();
-    total_volume++;
-    delay(100);
-    if(intput_volume >= total_volume){
-        stopFillingLiquid();
-    }
 }
 
 void stopFillingLiquid(){
     digitalWrite(LED, LOW);
     turnOffPump();
-    delay(1000);
+    delay(2000);
     intput_volume = 0;
-    total_volume = 0 ;
-    
+    total_volume = 0;
 }
 
 void turnOnPump(){
-    isFilling = true;
     digitalWrite(relay, LOW);
 }
 
 void turnOffPump(){
-    isFilling = false;
     digitalWrite(relay, HIGH);
 }
 
 void printConstantFillingInformation(){
     lcd.setCursor(0, 0);
-    lcd.print("required : ");
+    lcd.print("input : ");
 
     lcd.setCursor(14, 0);
     lcd.print("mL");
@@ -111,12 +94,4 @@ void printConstantFillingInformation(){
 
     lcd.setCursor(14, 1);
     lcd.print("mL");
-}
-
-void printVariableFillingInformation(){
-    lcd.setCursor(10, 0);
-    lcd.print(intput_volume);
-
-    lcd.setCursor(10, 1);
-    lcd.print(total_volume);
 }
